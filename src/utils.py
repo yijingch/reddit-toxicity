@@ -12,28 +12,47 @@ conn1 = sqlite3.connect(DBPATH1)
 # cur1 = conn.cursor()
 
 
-def build_subm_df(year, with_text=True):
+def build_subm_df(year, with_text=True, with_time=False):
     print("- fetching submissions for year", year)
     if with_text:
-        qr = f"SELECT id AS submission_id, author, title, selftext, subreddit, toxicity FROM 'submission-{year}' "
-        qr += f"WHERE author != '[deleted]' "
-        qr += f"AND (title != '' OR selftext != '')"
-        df = pd.read_sql_query(qr, conn1)
-        df["body"] = df["title"] + " " + df["selftext"]
-        df = df.drop(columns=["title", "selftext"])
+        if with_time:
+            qr = f"SELECT id AS submission_id, author, title, selftext, subreddit, toxicity, created_utc FROM 'submission-{year}' "
+            qr += f"WHERE author != '[deleted]' "
+            qr += f"AND (title != '' OR selftext != '')"
+            df = pd.read_sql_query(qr, conn1)
+            df["body"] = df["title"] + " " + df["selftext"]
+            df = df.drop(columns=["title", "selftext"])
+        else:
+            qr = f"SELECT id AS submission_id, author, title, selftext, subreddit, toxicity FROM 'submission-{year}' "
+            qr += f"WHERE author != '[deleted]' "
+            qr += f"AND (title != '' OR selftext != '')"
+            df = pd.read_sql_query(qr, conn1)
+            df["body"] = df["title"] + " " + df["selftext"]
+            df = df.drop(columns=["title", "selftext"])
     else:
-        qr = f"SELECT id AS submission_id, author, title, subreddit, toxicity FROM 'submission-{year}' "
-        qr += f"WHERE author != '[deleted]'"
-        df = pd.read_sql_query(qr, conn1)
+        if with_time:
+            qr = f"SELECT id AS submission_id, author, subreddit, toxicity, created_utc FROM 'submission-{year}' "
+            qr += f"WHERE author != '[deleted]'"
+            df = pd.read_sql_query(qr, conn1)
+        else:
+            qr = f"SELECT id AS submission_id, author, subreddit, toxicity FROM 'submission-{year}' "
+            qr += f"WHERE author != '[deleted]'"
+            df = pd.read_sql_query(qr, conn1)
     return df
 
 
-def build_comm_df(year, with_text=True):
+def build_comm_df(year, with_text=True, with_time=False):
     print("- fetching comments for year", year)
     if with_text:
-        qr = f"SELECT id AS comment_id, link_id AS submission_id, parent_id, author, body, subreddit, toxicity FROM 'comment-{year}' "
+        if with_time:
+            qr = f"SELECT id AS comment_id, link_id AS submission_id, parent_id, author, body, subreddit, toxicity, created_utc FROM 'comment-{year}' "
+        else:
+            qr = f"SELECT id AS comment_id, link_id AS submission_id, parent_id, author, body, subreddit, toxicity FROM 'comment-{year}' "
     else:
-        qr = f"SELECT id AS comment_id, link_id AS submission_id, parent_id, author, body, subreddit, toxicity FROM 'comment-{year}' "
+        if with_time:
+            qr = f"SELECT id AS comment_id, link_id AS submission_id, parent_id, author, subreddit, toxicity, created_utc FROM 'comment-{year}' "
+        else:
+            qr = f"SELECT id AS comment_id, link_id AS submission_id, parent_id, author, subreddit, toxicity FROM 'comment-{year}' "
     qr += f"WHERE author != '[deleted]' "
     qr += f"AND body != ''"
     df = pd.read_sql_query(qr, conn1)
@@ -41,12 +60,15 @@ def build_comm_df(year, with_text=True):
     return df
 
 
-def build_df_year(year):
+def build_df_year(year, with_text, with_time):
     global USERS, SUBREDDITS
     print(f"building base dataframe for year {year}...")
-    subm_df = build_subm_df(year)
-    comm_df = build_comm_df(year)
+    subm_df = build_subm_df(year, with_text=with_text, with_time=with_time)
+    comm_df = build_comm_df(year, with_text=with_text, with_time=with_time)
     df_year = pd.concat([subm_df,comm_df])
+    df_year["toxicity"] = df_year["toxicity"].fillna(value=np.nan)
+    df_year["toxicity"] = df_year["toxicity"].replace(r"^\s*$", np.nan, regex=True)
+    df_year["toxicity"] = df_year["toxicity"].astype(float)
     USERS = df_year.author.unique()
     SUBREDDITS = df_year.subreddit.unique()
     return df_year
