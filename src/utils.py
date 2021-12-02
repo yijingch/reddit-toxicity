@@ -76,7 +76,10 @@ def build_df_year(year, with_text, with_time):
 
 def generate_index():
     global subr2index, index2subr, index2user, user2index
-    subr2index = index2subr = index2user = user2index = {}
+    subr2index = {}
+    index2subr = {}
+    index2user = {}
+    user2index = {}
     for i,s in enumerate(SUBREDDITS):
         subr2index[s.lower()] = i
         index2subr[i] = s.lower()
