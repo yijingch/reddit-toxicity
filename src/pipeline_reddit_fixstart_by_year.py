@@ -217,4 +217,4 @@ if __name__ == "__main__":
 
 # code reference: https://www.textjuicer.com/2019/07/crawling-all-submissions-from-a-subreddit/
 
-# python3 pipeline_reddit_fixstart_by_year.py --start_year=2012 --end_year=2021
+# python3 pipeline_reddit_fixstart_by_year.py --start_year=2016 --end_year=2021
