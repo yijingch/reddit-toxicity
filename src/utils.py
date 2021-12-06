@@ -77,7 +77,7 @@ def build_df_year(year, with_text, with_time, filter_null):
     df_year["toxicity"] = df_year["toxicity"].astype(float)
     USERS = df_year.author.unique()
     SUBREDDITS = df_year.subreddit.unique()
-    print("- number of entries:", len(df))
+    print("- number of entries:", len(df_year))
     return df_year
 
 
@@ -99,6 +99,15 @@ def build_user_graph(dfyear):
     user_aggr = dfyear.groupby("author").agg({"subreddit": lambda x: set(list(x))}).reset_index()
     user
 
+
+def get_freq_seq(ls):
+    max_val = max(ls)
+    count_ls = Counter(ls)
+    seq = []
+    for i in range(max_val):
+        try: seq.append(count_ls[i])
+        except: seq.append(0)
+    return seq
 
 
 
