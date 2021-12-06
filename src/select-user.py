@@ -45,7 +45,7 @@ def write_active_userls(aggr_df, min_subr=2, min_subm=2, min_post=10):
 
 if __name__ == "__main__":
     print("loading data...")
-    df = load_data()
-    aggr = aggr_df(df)
+    dfall = load_data()
+    aggr = aggr_df(dfall)
     for x in [10, 20, 50, 100]:
         write_active_userls(aggr, min_subm=10, min_post=x)

@@ -11,8 +11,8 @@ Class project repository:
 
 (A) User-level:
 - A1: Who talks toxically?
-- A2.1: Are my neighbors generally more toxic than me?
-- A2.2: Does the paradox (if any) persist over time?
+- A2.1: Are my neighbors generally more toxic than me (i.e., toxicity friendship paradox)?
+- A2.2: Does the TFP (if any) persist over time?
 
 (B) Thread-level:
 - B1: How do toxic conversations usually structure?
