@@ -14,7 +14,7 @@ Class project repository:
 - A2.1: Are my neighbors generally more toxic than me (i.e., toxicity friendship paradox)?
 - A2.2: Does the TFP (if any) persist over time?
 
-(B) Thread-level:
+(B) Submission-level:
 - B1: How do toxic conversations usually structure?
 - B2: How do toxic conversations unfold?
 
@@ -23,7 +23,9 @@ Class project repository:
 - `parse_to_db.py`: parse .json files to sqlite .db
 - `select-user.py`: write lists of active users for future subsetting in analysis
 - `basic-descriptives.ipynb`: produce basic descriptives of the entire dataset
-- ``
+- `user-level-static.ipynb`: answers A1, A2.1
+- `user-level-tfp-overtime.ipynb`: answers A2.2
+- `subm-level`:
 
 ## Dataset
 User-generated content retrieved from 51 active political subreddits from Jan 2012 to Dec 2015.

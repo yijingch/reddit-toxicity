@@ -37,10 +37,11 @@ def aggr_df(df):
     user_aggr["n_subr"] = user_aggr["subreddit"].map(lambda x: len(x))
     user_aggr["n_subm"] = user_aggr["submission_id"].map(lambda x: len(x))
     user_aggr["n_post"] = user_aggr["uniq_id"].map(lambda x: len(x))
-    return aggr_df
+    return user_aggr
 
 def write_active_userls(aggr_df, min_subr=2, min_subm=2, min_post=10):
-    user_select = user_aggr[(user_aggr["n_subm"]>=min_subm)&(user_aggr["n_post"]>=min_post)&(user_aggr["n_subr"]>=min_subr)][["author"]]
+    print("writing user lists...")
+    user_select = aggr_df[(aggr_df["n_subm"]>=min_subm)&(aggr_df["n_post"]>=min_post)&(aggr_df["n_subr"]>=min_subr)][["author"]]
     user_select.to_csv(ROOTPATH + f"indx/ACTIVEUSERS_ALLYEARS_{min_subr}_{min_subm}_{min_post}.csv", index=False)
 
 if __name__ == "__main__":
