@@ -42,5 +42,7 @@ User-generated content retrieved from 51 active political subreddits from Jan 20
 
 ## Reference
 [1] Eom, Y. H., & Jo, H. H. (2014). Generalized friendship paradox in complex networks: The case of scientific collaboration. Scientific reports, 4(1), 1-6.
+
 [2] Goel, S., Anderson, A., Hofman, J., & Watts, D. J. (2016). The structural virality of online diffusion. Management Science, 62(1), 180-196.
+
 [3] Rajadesingan, A., Resnick, P., & Budak, C. (2020, May). Quick, community-specific learning: How distinctive toxicity norms are maintained in political subreddits. In Proceedings of the International AAAI Conference on Web and Social Media (Vol. 14, pp. 557-568).
