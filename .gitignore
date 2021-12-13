@@ -10,8 +10,6 @@ index/*
 assets/*
 secrets/*
 test/*
-paper/*
-report/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
