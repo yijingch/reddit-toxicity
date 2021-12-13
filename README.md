@@ -19,13 +19,14 @@ Class project repository:
 - B2: How do toxic conversations unfold?
 
 ## Code guide
-- `pipeline_reddit_fixstart_by_year.py`: crawl Reddit submissions and comments through Pushshift API
-- `parse_to_db.py`: parse .json files to sqlite .db
+- `pipeline-reddit-fixstart-by-year.py`: crawl Reddit submissions and comments through Pushshift API
+- `parse-to-db.py`: parse .json files to sqlite .db
 - `select-user.py`: write lists of active users for future subsetting in analysis
 - `basic-descriptives.ipynb`: produce basic descriptives of the entire dataset
-- `user-level-static.ipynb`: answers A1, A2.1
+- `user-level-static.ipynb`: answers A1 and A2.1
 - `user-level-tfp-overtime.ipynb`: answers A2.2
-- `subm-level`:
+- `subm-level.ipynb`: answers B1 and B2
+- `utils.py`: basic utility functions such as importing data and building networks
 
 ## Dataset
 User-generated content retrieved from 51 active political subreddits from Jan 2012 to Dec 2015.
@@ -40,7 +41,6 @@ User-generated content retrieved from 51 active political subreddits from Jan 20
 - Raw data or text content will not be released here.
 
 ## Reference
-
-[1] Goel, S., Anderson, A., Hofman, J., & Watts, D. J. (2016). The structural virality of online diffusion. Management Science, 62(1), 180-196.
-
-[2] Foti, N. J., Hughes, J. M., & Rockmore, D. N. (2011). Nonparametric sparsification of complex multiscale networks. PloS one, 6(2), e16431.
+[1] Eom, Y. H., & Jo, H. H. (2014). Generalized friendship paradox in complex networks: The case of scientific collaboration. Scientific reports, 4(1), 1-6.
+[2] Goel, S., Anderson, A., Hofman, J., & Watts, D. J. (2016). The structural virality of online diffusion. Management Science, 62(1), 180-196.
+[3] Rajadesingan, A., Resnick, P., & Budak, C. (2020, May). Quick, community-specific learning: How distinctive toxicity norms are maintained in political subreddits. In Proceedings of the International AAAI Conference on Web and Social Media (Vol. 14, pp. 557-568).
